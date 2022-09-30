@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import {GlobalStyle} from './GlobalStyle';
 
 import Title from "./components/Title";
-import Questions from "./components/Questions";
+import CardsList from "./components/CardsList";
 import Footer from "./components/Footer";
 
 export default function App() {
@@ -10,7 +10,7 @@ export default function App() {
         <div className="root">
             <Container>
                 <Title />
-                <Questions />
+                <CardsList />
                 <Footer />
             </Container>
             <GlobalStyle/>
