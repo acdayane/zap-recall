@@ -1,25 +1,33 @@
 import styled from "styled-components";
 
-import certo from "../assets/img/icone_certo.png";
-import erro from "../assets/img/icone_erro.png";
-import quase from "../assets/img/icone_quase.png";
+import play from "../assets/img/seta_play.png";
+import virar from "../assets/img/seta_virar.png";
 
 export default function Card(props) {
 
-    const { id, question, answer, open, status } = props.flashcard;
+    const {flashcards, arrStatus, openQuestion, openAnswer, classify} = props;
+    const { id, question, answer, open, status } = props.flashcards;
 
     return (
         <>
-            <PerguntaFechada>
-                <p>Pergunta 1</p>
-                
-            </PerguntaFechada>
-            <PerguntaAberta>
-                <p>{question}</p>
-                <img src={certo} alt={certo}/>
-                <p>{answer}</p>
-
-            </PerguntaAberta>
+            {open === 'close' &&
+                <PerguntaFechada onClick={()=>openQuestion(id)}>
+                    <p>Pergunta {id}</p>
+                    <img src={play} alt={play} />
+                </PerguntaFechada>
+            }
+            {open === 'open1' &&
+                <PerguntaAberta onClick={()=>openAnswer(id)}>
+                    <p>{question}</p>
+                    <img src={virar} alt={virar} />
+                </PerguntaAberta>
+            }
+            {open === 'open2' &&
+                <PerguntaAberta onClick={()=>classify(id)}>
+                    <p>{answer}</p>
+                    <img src={arrStatus[0]} alt={arrStatus[0]}/>
+                </PerguntaAberta>
+            }
         </>
     )
 }
@@ -35,6 +43,7 @@ const PerguntaFechada = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
 
 p {
     font-family: 'Recursive';
@@ -63,7 +72,8 @@ const PerguntaAberta = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
+    cursor: pointer;
+ 
 img {
     position: absolute;
     bottom: 10px;

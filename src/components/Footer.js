@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
-export default function Footer() {
+export default function Footer(props) {
+
+    const {flashcards} = props
+  
     return (
         <ContainerFooter>
             <ContainerButtons>
@@ -8,7 +11,7 @@ export default function Footer() {
                 <button style={{backgroundColor:"#FF922E"}}>Quase não lembrei</button>
                 <button style={{backgroundColor:"#2FBE34"}}>Zap!</button>
             </ContainerButtons>
-            <h1>0/4 CONCLUÍDOS</h1>
+                <h1>0/{flashcards.length} CONCLUÍDOS</h1>
         </ContainerFooter>
     )
 }

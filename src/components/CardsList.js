@@ -1,12 +1,13 @@
-import FLASHCARDS from '../flashcards';
+import Card from "./Card"
 
-import Card from "./Card";
+export default function CardsList(props) {
 
-export default function CardsList() {
+const {flashcards, arrStatus, openQuestion, openAnswer, classify} = props
 
     return (
         <>
-            {FLASHCARDS.map((f) => <Card key={f.id} flashcard={f}/>)}
+           {flashcards.map((card) => <Card key={card.id} flashcards={card} arrStatus={arrStatus}
+           openQuestion={openQuestion} openAnswer={openAnswer} classify={classify}/>)}
         </>
     )
 }
