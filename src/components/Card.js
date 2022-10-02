@@ -23,7 +23,7 @@ export default function Card(props) {
                 </PerguntaAberta>
             }
             {open === 'open2' &&
-                <PerguntaAberta onClick={()=>classify(id)}>
+                <PerguntaAberta>
                     <p>{answer}</p>
                     <img src={arrStatus[0]} alt={arrStatus[0]}/>
                 </PerguntaAberta>

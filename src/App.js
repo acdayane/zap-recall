@@ -11,30 +11,47 @@ import certo from "./assets/img/icone_certo.png";
 import erro from "./assets/img/icone_erro.png";
 import quase from "./assets/img/icone_quase.png";
 
+
 export default function App() {
 
-    const arrStatus = ["", erro, quase, certo];
-    
+    const arrStatus = ["", erro, quase, certo];  
+        
     const [refresh, setRefresh] = useState('close');
 
+    const [status, setStatus] = useState('');
+   
     function openQuestion (id) {  
+
         let filtered = FLASHCARDS.filter((card) => (card.open === 'close'))
-            if (filtered.length === FLASHCARDS.length){
+
+        if (filtered.length === FLASHCARDS.length){
             FLASHCARDS[id-1].open = 'open1';
             setRefresh('open1');  
         }        
     }
 
     function openAnswer(id) {
+        
         FLASHCARDS[id-1].open = 'open2';
         setRefresh('open2');
-    }
+      
+    }     
+   
+    function classify () {
 
-    function classify (id) {
-        FLASHCARDS[id-1].open = 'close';
-        FLASHCARDS[id-1].status = 3;
+        let filtered = FLASHCARDS.filter((card) => (card.open === 'open2'))
+        
+        FLASHCARDS[filtered[0].id-1].open = 'close';
         setRefresh('close');
+
+        FLASHCARDS[filtered[0].id-1].status = 3;
+        setStatus(3)
+        
+        //FLASHCARDS[idQuestion-1].open = 'close';
+        //FLASHCARDS[idQuestion-1].status = 3;
+        
     }
+    
 
     return (
         <div className="root">
@@ -45,14 +62,14 @@ export default function App() {
                     arrStatus={arrStatus}
                     openQuestion={openQuestion}
                     openAnswer={openAnswer}
-                    classify={classify}
+                    classify={classify}                    
                 />
                 <Footer
                     flashcards={FLASHCARDS}                   
                     arrStatus={arrStatus}
                     openQuestion={openQuestion}
                     openAnswer={openAnswer}
-                    classify={classify}
+                    classify={classify}                  
                 />
             </Container>
             <GlobalStyle/>
