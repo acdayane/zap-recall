@@ -3,31 +3,30 @@ import styled from 'styled-components';
 
 export default function Footer(props) {
 
-    const {flashcards, arrStatus, openQuestion, openAnswer, classify} = props;
-    const { id, question, answer, open, status } = props.flashcards;
+    const {flashcards, classify} = props;
 
-    let filtered = props.flashcards.filter((card) => (card.status !== ''));
+    let filtered = flashcards.filter((card) => (card.status !== ''));
 
-    let qtyAnswerScreen = props.flashcards.filter((card) => (card.open === 'open2'));
+    let qtyAnswerScreen = flashcards.filter((card) => (card.open === 'open2'));
 
  
     return (
         <ContainerFooter>
             {qtyAnswerScreen.length === 0 &&
             <ContainerButtons>            
-                <button disabled={true} style={{backgroundColor:"#A9A9A9"}} onClick={() => classify()}>Não lembrei</button>
-                <button disabled={true} style={{backgroundColor:"#A9A9A9"}} onClick={() => classify()}>Quase não lembrei</button>
-                <button disabled={true} style={{backgroundColor:"#A9A9A9"}} onClick={() => classify()}>Zap!</button>    
+                <button disabled={true} style={{backgroundColor:"#A9A9A9"}}>Não lembrei</button>
+                <button disabled={true} style={{backgroundColor:"#A9A9A9"}}>Quase não lembrei</button>
+                <button disabled={true} style={{backgroundColor:"#A9A9A9"}}>Zap!</button>    
             </ContainerButtons>
             }
             {qtyAnswerScreen.length === 1 &&
             <ContainerButtons>            
-                <button disabled={false} style={{backgroundColor:"#FF3030"}} onClick={() => classify()}>Não lembrei</button>
-                <button disabled={false} style={{backgroundColor:"#FF922E"}} onClick={() => classify()}>Quase não lembrei</button>
-                <button disabled={false} style={{backgroundColor:"#2FBE34"}} onClick={() => classify()}>Zap!</button>    
+                <button disabled={false} style={{backgroundColor:"#FF3030"}} onClick={() => classify('erro')}>Não lembrei</button>
+                <button disabled={false} style={{backgroundColor:"#FF922E"}} onClick={() => classify('quase')}>Quase não lembrei</button>
+                <button disabled={false} style={{backgroundColor:"#2FBE34"}} onClick={() => classify('certo')}>Zap!</button>    
             </ContainerButtons>
             }
-                <h1>{filtered.length}/{props.flashcards.length} CONCLUÍDOS</h1>
+                <h1>{filtered.length}/{flashcards.length} CONCLUÍDOS</h1>
         </ContainerFooter>
     )
 }

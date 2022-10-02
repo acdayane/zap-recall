@@ -13,42 +13,55 @@ import quase from "./assets/img/icone_quase.png";
 
 
 export default function App() {
-
-    const arrStatus = ["", erro, quase, certo];  
         
-    const [refresh, setRefresh] = useState('close');
+    const [open, setOpen] = useState('close');
 
-    const [status, setStatus] = useState('');
+    const [image, setImage] = useState('');
+
    
     function openQuestion (id) {  
 
         let filtered = FLASHCARDS.filter((card) => (card.open === 'close'))
 
-        if (filtered.length === FLASHCARDS.length){
+        if (filtered.length === FLASHCARDS.length && FLASHCARDS[id-1].status === ''){
             FLASHCARDS[id-1].open = 'open1';
-            setRefresh('open1');  
+            setOpen('open1');  
         }        
     }
+
 
     function openAnswer(id) {
         
         FLASHCARDS[id-1].open = 'open2';
-        setRefresh('open2');
+        setOpen('open2');
       
     }     
+
    
-    function classify () {
+    function classify (status) {
+               
+        let filtered = FLASHCARDS.filter((card) => (card.open === 'open2'))             
 
-        let filtered = FLASHCARDS.filter((card) => (card.open === 'open2'))
-        
+        if (status === 'erro'){
+            FLASHCARDS[filtered[0].id-1].status = 'erro';
+            FLASHCARDS[filtered[0].id-1].image = erro;
+            setOpen(erro)          
+        }
+
+        if (status === 'quase'){
+            FLASHCARDS[filtered[0].id-1].status = 'quase';
+            FLASHCARDS[filtered[0].id-1].image = quase;
+            setImage(quase)
+        }
+
+        if (status === 'certo') {
+            FLASHCARDS[filtered[0].id-1].status = 'certo';
+            FLASHCARDS[filtered[0].id-1].image = certo;
+            setImage(certo)
+        }
+
         FLASHCARDS[filtered[0].id-1].open = 'close';
-        setRefresh('close');
-
-        FLASHCARDS[filtered[0].id-1].status = 3;
-        setStatus(3)
-        
-        //FLASHCARDS[idQuestion-1].open = 'close';
-        //FLASHCARDS[idQuestion-1].status = 3;
+        setOpen('close');
         
     }
     
@@ -59,16 +72,12 @@ export default function App() {
                 <Title />
                 <CardsList
                     flashcards={FLASHCARDS}
-                    arrStatus={arrStatus}
                     openQuestion={openQuestion}
                     openAnswer={openAnswer}
                     classify={classify}                    
                 />
                 <Footer
                     flashcards={FLASHCARDS}                   
-                    arrStatus={arrStatus}
-                    openQuestion={openQuestion}
-                    openAnswer={openAnswer}
                     classify={classify}                  
                 />
             </Container>

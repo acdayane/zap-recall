@@ -1,19 +1,18 @@
 import styled from "styled-components";
 
-import play from "../assets/img/seta_play.png";
 import virar from "../assets/img/seta_virar.png";
 
 export default function Card(props) {
 
-    const {flashcards, arrStatus, openQuestion, openAnswer, classify} = props;
-    const { id, question, answer, open, status } = props.flashcards;
+    const {flashcards, openQuestion, openAnswer} = props;
+    const { id, question, answer, open, status, image } = props.flashcards;
 
     return (
         <>
             {open === 'close' &&
                 <PerguntaFechada onClick={()=>openQuestion(id)}>
                     <p>Pergunta {id}</p>
-                    <img src={play} alt={play} />
+                    <img src={image} alt={image} />
                 </PerguntaFechada>
             }
             {open === 'open1' &&
@@ -25,7 +24,6 @@ export default function Card(props) {
             {open === 'open2' &&
                 <PerguntaAberta>
                     <p>{answer}</p>
-                    <img src={arrStatus[0]} alt={arrStatus[0]}/>
                 </PerguntaAberta>
             }
         </>

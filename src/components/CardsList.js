@@ -2,12 +2,12 @@ import Card from "./Card"
 
 export default function CardsList(props) {
 
-const {flashcards, arrStatus, openQuestion, openAnswer, classify} = props
+const {flashcards, openQuestion, openAnswer} = props
 
     return (
         <>
-           {flashcards.map((card) => <Card key={card.id} flashcards={card} arrStatus={arrStatus}
-           openQuestion={openQuestion} openAnswer={openAnswer} classify={classify}/>)}
+           {flashcards.map((card) => <Card key={card.id} flashcards={card}
+           openQuestion={openQuestion} openAnswer={openAnswer}/>)}
         </>
     )
 }
