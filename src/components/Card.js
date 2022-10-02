@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import virar from "../assets/img/seta_virar.png";
 
+
 export default function Card(props) {
 
     const {flashcards, openQuestion, openAnswer} = props;
@@ -10,15 +11,32 @@ export default function Card(props) {
     return (
         <>
             {open === 'close' &&
-                <PerguntaFechada onClick={()=>openQuestion(id)}>
-                    <p>Pergunta {id}</p>
-                    <img src={image} alt={image} />
+                <PerguntaFechada>
+                    {status === '' &&
+                        <p>Pergunta {id}</p>
+                    }
+                    {status === 'erro' &&
+                        <p style={{color: '#FF3030', textDecoration: 'line-through'}}>
+                            Pergunta {id}
+                        </p>
+                    }
+                    {status === 'quase' &&
+                        <p style={{color: '#FF922E', textDecoration: 'line-through'}}>
+                            Pergunta {id}
+                        </p>
+                    }
+                    {status === 'certo' &&
+                        <p style={{color: '#2FBE34', textDecoration: 'line-through'}}>
+                            Pergunta {id}
+                        </p>
+                    }
+                    <img src={image} alt={image} onClick={()=>openQuestion(id)} data-identifier="flashcard-show-btn"/>
                 </PerguntaFechada>
             }
             {open === 'open1' &&
-                <PerguntaAberta onClick={()=>openAnswer(id)}>
+                <PerguntaAberta data-identifier="flashcard-turn-btn" >
                     <p>{question}</p>
-                    <img src={virar} alt={virar} />
+                    <img src={virar} alt={virar} onClick={()=>openAnswer(id)} data-identifier="flashcard-turn-btn"/>
                 </PerguntaAberta>
             }
             {open === 'open2' &&
@@ -41,7 +59,6 @@ const PerguntaFechada = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    cursor: pointer;
 
 p {
     font-family: 'Recursive';
@@ -50,6 +67,9 @@ p {
     font-size: 16px;
     line-height: 19px;
     color: #333333;
+}
+img {
+    cursor: pointer;
 }
 `
 const PerguntaAberta = styled.div`
@@ -70,11 +90,11 @@ const PerguntaAberta = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    cursor: pointer;
  
 img {
     position: absolute;
     bottom: 10px;
     right: 10px;
+    cursor: pointer;
 }
 `

@@ -21,9 +21,9 @@ export default function Footer(props) {
             }
             {qtyAnswerScreen.length === 1 &&
             <ContainerButtons>            
-                <button disabled={false} style={{backgroundColor:"#FF3030"}} onClick={() => classify('erro')}>Não lembrei</button>
-                <button disabled={false} style={{backgroundColor:"#FF922E"}} onClick={() => classify('quase')}>Quase não lembrei</button>
-                <button disabled={false} style={{backgroundColor:"#2FBE34"}} onClick={() => classify('certo')}>Zap!</button>    
+                <button disabled={false} style={{backgroundColor:"#FF3030"}} onClick={() => classify('erro')} data-identifier="forgot-btn">Não lembrei</button>
+                <button disabled={false} style={{backgroundColor:"#FF922E"}} onClick={() => classify('quase')} data-identifier="almost-forgot-btn">Quase não lembrei</button>
+                <button disabled={false} style={{backgroundColor:"#2FBE34"}} onClick={() => classify('certo')} data-identifier="zap-btn">Zap!</button>    
             </ContainerButtons>
             }
                 <h1>{filtered.length}/{flashcards.length} CONCLUÍDOS</h1>

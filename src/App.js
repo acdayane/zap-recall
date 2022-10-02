@@ -13,6 +13,7 @@ import quase from "./assets/img/icone_quase.png";
 
 
 export default function App() {
+    
         
     const [open, setOpen] = useState('close');
 
@@ -38,23 +39,23 @@ export default function App() {
     }     
 
    
-    function classify (status) {
+    function classify (buttonText) {
                
         let filtered = FLASHCARDS.filter((card) => (card.open === 'open2'))             
 
-        if (status === 'erro'){
+        if (buttonText === 'erro'){
             FLASHCARDS[filtered[0].id-1].status = 'erro';
             FLASHCARDS[filtered[0].id-1].image = erro;
             setOpen(erro)          
         }
 
-        if (status === 'quase'){
+        if (buttonText === 'quase'){
             FLASHCARDS[filtered[0].id-1].status = 'quase';
             FLASHCARDS[filtered[0].id-1].image = quase;
             setImage(quase)
         }
 
-        if (status === 'certo') {
+        if (buttonText === 'certo') {
             FLASHCARDS[filtered[0].id-1].status = 'certo';
             FLASHCARDS[filtered[0].id-1].image = certo;
             setImage(certo)
@@ -62,7 +63,7 @@ export default function App() {
 
         FLASHCARDS[filtered[0].id-1].open = 'close';
         setOpen('close');
-        
+
     }
     
 
@@ -73,8 +74,7 @@ export default function App() {
                 <CardsList
                     flashcards={FLASHCARDS}
                     openQuestion={openQuestion}
-                    openAnswer={openAnswer}
-                    classify={classify}                    
+                    openAnswer={openAnswer}                   
                 />
                 <Footer
                     flashcards={FLASHCARDS}                   
